@@ -1,0 +1,27 @@
+//this file includes rules that typescript will use to enforce type safety throughout the project
+
+//package.json file contains all of the projects dependencies
+// scripts and metadata
+
+//app.json contains configurations options for the project. these options change behavior of the project while developing
+
+//
+
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
+  ]
+}
