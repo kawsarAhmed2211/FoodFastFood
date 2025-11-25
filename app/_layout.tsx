@@ -2,7 +2,7 @@
 // within your application, that means you need to put it in layout.tsx
 
 import {SplashScreen, Stack} from "expo-router";
-import "./global.css";
+import "../global.css"
 import {useFonts} from "expo-font";
 import {useEffect} from "react";
 export default function RootLayout() {

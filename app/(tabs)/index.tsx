@@ -1,4 +1,4 @@
-import "../global.css"
+import "../../global.css"
 import {FlatList, Pressable, Image, Text, View, TouchableOpacity} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {images, offers} from "@/constants";
