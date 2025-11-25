@@ -5,6 +5,7 @@ import {images, offers} from "@/constants";
 import {Fragment} from "react";
 import cn from "clsx";
 import CartButton from "@/components/CartButton";
+import {Link} from "expo-router";
 //in react native, wrap with safeareaview from react-view -safe- context
 export default function Index() {
     return (
@@ -51,6 +52,7 @@ export default function Index() {
                             <Text className={"small-bold text-primary"}>DELIVER TO </Text>
                             <TouchableOpacity className={"flex-center flex-row"}>
                                 <Text className={"paragraph-bold text-dark-100"}>UNITED KINGDOM</Text>
+                                <Link href={"/sign-in"}>Sign in</Link>
                                 <Image source={images.arrowDown} className={"size-3"} resizeMode="contain"/>
                             </TouchableOpacity>
                         </View>
