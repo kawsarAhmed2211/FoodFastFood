@@ -8,7 +8,7 @@ const dummyData = {
         { name: "Bowls", description: "Balanced rice and protein bowls" },
     ],
 
-    customizations: [
+    customisations: [
         // Toppings
         { name: "Extra Cheese", price: 25, type: "topping" },
         { name: "Jalapeños", price: 20, type: "topping" },
@@ -43,7 +43,7 @@ const dummyData = {
             calories: 550,
             protein: 25,
             category_name: "Burgers",
-            customizations: ["Extra Cheese", "Coke", "Fries", "Onions", "Bacon"],
+            customisations: ["Extra Cheese", "Coke", "Fries", "Onions", "Bacon"],
         },
         {
             name: "Pepperoni Pizza",
@@ -55,7 +55,7 @@ const dummyData = {
             calories: 700,
             protein: 30,
             category_name: "Pizzas",
-            customizations: [
+            customisations: [
                 "Extra Cheese",
                 "Jalapeños",
                 "Garlic Bread",
@@ -73,7 +73,7 @@ const dummyData = {
             calories: 480,
             protein: 18,
             category_name: "Burritos",
-            customizations: ["Jalapeños", "Iced Tea", "Fries", "Salad"],
+            customisations: ["Jalapeños", "Iced Tea", "Fries", "Salad"],
         },
         {
             name: "BBQ Bacon Burger",
@@ -85,7 +85,7 @@ const dummyData = {
             calories: 650,
             protein: 29,
             category_name: "Burgers",
-            customizations: ["Onions", "Fries", "Coke", "Bacon", "Avocado"],
+            customisations: ["Onions", "Fries", "Coke", "Bacon", "Avocado"],
         },
         {
             name: "Chicken Caesar Wrap",
@@ -97,7 +97,7 @@ const dummyData = {
             calories: 490,
             protein: 28,
             category_name: "Wraps",
-            customizations: ["Extra Cheese", "Coke", "Potato Wedges", "Tomatoes"],
+            customisations: ["Extra Cheese", "Coke", "Potato Wedges", "Tomatoes"],
         },
         {
             name: "Grilled Veggie Sandwich",
@@ -109,7 +109,7 @@ const dummyData = {
             calories: 420,
             protein: 19,
             category_name: "Sandwiches",
-            customizations: ["Mushrooms", "Olives", "Mozzarella Sticks", "Iced Tea"],
+            customisations: ["Mushrooms", "Olives", "Mozzarella Sticks", "Iced Tea"],
         },
         {
             name: "Double Patty Burger",
@@ -121,7 +121,7 @@ const dummyData = {
             calories: 720,
             protein: 35,
             category_name: "Burgers",
-            customizations: [
+            customisations: [
                 "Extra Cheese",
                 "Onions",
                 "Fries",
@@ -139,7 +139,7 @@ const dummyData = {
             calories: 470,
             protein: 20,
             category_name: "Wraps",
-            customizations: ["Jalapeños", "Tomatoes", "Salad", "Fries", "Iced Tea"],
+            customisations: ["Jalapeños", "Tomatoes", "Salad", "Fries", "Iced Tea"],
         },
         {
             name: "Mexican Burrito Bowl",
@@ -151,7 +151,7 @@ const dummyData = {
             calories: 610,
             protein: 24,
             category_name: "Bowls",
-            customizations: ["Avocado", "Sweet Corn", "Salad", "Iced Tea"],
+            customisations: ["Avocado", "Sweet Corn", "Salad", "Iced Tea"],
         },
         {
             name: "Spicy Chicken Sandwich",
@@ -163,7 +163,7 @@ const dummyData = {
             calories: 540,
             protein: 26,
             category_name: "Sandwiches",
-            customizations: [
+            customisations: [
                 "Jalapeños",
                 "Onions",
                 "Fries",
@@ -181,7 +181,7 @@ const dummyData = {
             calories: 590,
             protein: 21,
             category_name: "Pizzas",
-            customizations: ["Extra Cheese", "Olives", "Coke", "Garlic Bread"],
+            customisations: ["Extra Cheese", "Olives", "Coke", "Garlic Bread"],
         },
         {
             name: "Protein Power Bowl",
@@ -193,7 +193,7 @@ const dummyData = {
             calories: 580,
             protein: 38,
             category_name: "Bowls",
-            customizations: ["Avocado", "Salad", "Sweet Corn", "Iced Tea"],
+            customisations: ["Avocado", "Salad", "Sweet Corn", "Iced Tea"],
         },
         {
             name: "Paneer Burrito",
@@ -205,7 +205,7 @@ const dummyData = {
             calories: 510,
             protein: 22,
             category_name: "Burritos",
-            customizations: ["Jalapeños", "Fries", "Garlic Bread", "Coke"],
+            customisations: ["Jalapeños", "Fries", "Garlic Bread", "Coke"],
         },
         {
             name: "Chicken Club Sandwich",
@@ -217,7 +217,7 @@ const dummyData = {
             calories: 610,
             protein: 31,
             category_name: "Sandwiches",
-            customizations: ["Bacon", "Tomatoes", "Mozzarella Sticks", "Iced Tea"],
+            customisations: ["Bacon", "Tomatoes", "Mozzarella Sticks", "Iced Tea"],
         },
     ],
 };

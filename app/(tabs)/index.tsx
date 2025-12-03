@@ -2,17 +2,44 @@ import "../../global.css"
 import {FlatList, Pressable, Image, Text, View, TouchableOpacity, Button} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {images, offers} from "@/constants";
-import {Fragment} from "react";
+import {Fragment, useEffect} from "react";
 import cn from "clsx";
 import CartButton from "@/components/CartButton";
 import {Link} from "expo-router";
 import * as Sentry from '@sentry/react-native'
 import useAuthStore from "@/store/auth.store";
+import {getCategoriesTable, getCustomisation} from "@/lib/appwrite";
 //in react native, wrap with safeareaview from react-view -safe- context
 export default function Index() {
 
     const {user} = useAuthStore();
-    console.log("UseAUthStore:", JSON.stringify(user,null,2));
+    console.log("Index.ts in tabs folder line 15 UseAUthStore:", JSON.stringify(user,null,2));
+
+
+    // useEffect(() => {
+    //     async function loadCustomisations() {
+    //         try {
+    //             const data = await getCustomisation();
+    //             console.log("CUSTOMISATIONS:", JSON.stringify(data, null, 2));
+    //         } catch (error) {
+    //             console.log("Failed to load customisations:", error);
+    //         }
+    //     }
+    //
+    //     loadCustomisations();
+    // }, []);
+
+    useEffect(() => {
+        async function loadData(){
+            try{
+                const data = await getCategoriesTable();
+                console.log("Menu:", JSON.stringify(data, null, 2));
+            }catch (error) {
+                console.log("Failed to load customisations:", error);
+            }
+        }
+        loadData();
+    }, []);
     return (
         <SafeAreaView className="flex-1 bg-white">
             <FlatList

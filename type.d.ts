@@ -22,7 +22,7 @@ export interface User extends Models.Document {
     avatar: string;
 }
 
-export interface CartCustomization {
+export interface CartCustomisation {
     id: string;
     name: string;
     price: number;
@@ -35,15 +35,15 @@ export interface CartItemType {
     price: number;
     image_url: string;
     quantity: number;
-    customizations?: CartCustomization[];
+    customisations?: [];
 }
 
 export interface CartStore {
     items: CartItem[];
     addItem: (item: Omit<CartItem, "quantity">) => void;
-    removeItem: (id: string, customizations: CartCustomization[]) => void;
-    increaseQty: (id: string, customizations: CartCustomization[]) => void;
-    decreaseQty: (id: string, customizations: CartCustomization[]) => void;
+    removeItem: (id: string, customisations: []) => void;
+    increaseQty: (id: string, customisations: []) => void;
+    decreaseQty: (id: string, customisations: []) => void;
     clearCart: () => void;
     getTotalItems: () => number;
     getTotalPrice: () => number;
