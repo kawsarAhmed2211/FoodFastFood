@@ -1,0 +1,166 @@
+import { ID } from "react-native-appwrite";
+import { appwriteConfig, tables, storage } from "./appwrite";
+import dummyData from "./data";
+
+interface Category {
+    name: string;
+    description: string;
+}
+
+interface Customisations {
+    name: string;
+    price: number;
+    type: "topping" | "side" | "size" | "crust" | string; // extend as needed
+}
+
+interface MenuItem {
+    name: string;
+    description: string;
+    image_url: string;
+    price: number;
+    rating: number;
+    calories: number;
+    protein: number;
+    category_name: string;
+    customisations: string[]; // list of customization names
+}
+
+interface DummyData {
+    categories: Category[];
+    customisations: Customisations[];
+    menu: MenuItem[];
+}
+
+// ensure dummyData has correct shape
+const data = dummyData as any as  DummyData;
+
+async function clearAll(collectionId: string): Promise<void> {
+    const list = await tables.listRows({
+        databaseId: appwriteConfig.databaseId,
+        tableId: collectionId
+    });
+
+    await Promise.all(
+        list.rows.map((doc) =>
+            tables.deleteRow(
+                {
+                    databaseId: appwriteConfig.databaseId,
+                    tableId: collectionId,
+                    rowId: doc.$id
+                })
+        )
+    );
+}
+
+async function clearStorage(): Promise<void> {
+    const list = await storage.listFiles({
+        bucketId: appwriteConfig.bucketId
+    });
+
+    await Promise.all(
+        list.files.map((file: any) =>
+            storage.deleteFile({
+                bucketId: appwriteConfig.bucketId,
+                fileId: file.$id})
+        )
+    );
+}
+
+async function uploadImageToStorage(imageUrl: string) {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+
+    const fileObj = {
+        name: imageUrl.split("/").pop() || `file-${Date.now()}.jpg`,
+        type: blob.type,
+        size: blob.size,
+        uri: imageUrl,
+    };
+
+    const file = await storage.createFile({
+        bucketId: appwriteConfig.bucketId,
+        fileId: ID.unique(),
+        file: fileObj
+    });
+
+    return storage.getFileViewURL(appwriteConfig.bucketId, file.$id);
+}
+
+async function seed(): Promise<void> {
+    // 1. Clear all
+    await clearAll(appwriteConfig.categoriesTable);
+    await clearAll(appwriteConfig.customisationsTable);
+    await clearAll(appwriteConfig.menuTable);
+    await clearAll(appwriteConfig.menu_customisationsTable);
+    await clearStorage();
+
+    // 2. Create Categories
+    const categoryMap: Record<string, string> = {};
+    for (const cat of data.categories) {
+        const doc = await tables.createRow({
+            databaseId: appwriteConfig.databaseId,
+            tableId: appwriteConfig.categoriesTable,
+            rowId: ID.unique(),
+            data: cat
+        });
+        categoryMap[cat.name] = doc.$id;
+    }
+
+    // 3. Create Customizations
+    const customizationMap: Record<string, string> = {};
+    for (const cus of data.customisations) {
+        const doc = await tables.createRow({
+            databaseId: appwriteConfig.databaseId,
+            tableId: appwriteConfig.customisationsTable,
+            rowId: ID.unique(),
+            data: {
+                name: cus.name,
+                price: cus.price,
+                type: cus.type,
+
+            }
+        });
+        customizationMap[cus.name] = doc.$id;
+    }
+
+    // 4. Create Menu Items
+    const menuMap: Record<string, string> = {};
+    for (const item of data.menu) {
+        const uploadedImage = await uploadImageToStorage(item.image_url);
+
+        const doc = await tables.createRow({
+            databaseId: appwriteConfig.databaseId,
+            tableId: appwriteConfig.menuTable,
+            rowId: ID.unique(),
+            data: {
+                name: item.name,
+                description: item.description,
+                image_url: uploadedImage,
+                price: item.price,
+                rating: item.rating,
+                calories: item.calories,
+                protein: item.protein,
+                categories: categoryMap[item.category_name],
+            }
+        });
+
+        menuMap[item.name] = doc.$id;
+
+        // 5. Create menu_customizations
+        for (const cusName of item.customisations) {
+            await tables.createRow({
+                databaseId: appwriteConfig.databaseId,
+                tableId: appwriteConfig.menu_customisationsTable,
+                rowId: ID.unique(),
+                data: {
+                    menu: doc.$id,
+                    customisations: customizationMap[cusName],
+                }
+            });
+        }
+    }
+
+    console.log("✅ Seeding complete.");
+}
+
+export default seed;
